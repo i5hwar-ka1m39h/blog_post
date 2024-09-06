@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const DBURL = 'mongodb://127.0.0.1:27017/blog_web'
+const DBURL = process.env.MONGO_URL||'mongodb://127.0.0.1:27017/blog_web'
 
 export const connectDB = async() =>{
     try {

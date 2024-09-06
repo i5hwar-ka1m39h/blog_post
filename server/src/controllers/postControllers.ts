@@ -3,7 +3,7 @@ import { Post } from "../model/allModel";
 
 export const postingPost = async (req : Request, res : Response)  => {
     try {
-        const {title, description, content,  } = req.body
+        const {title, description, content  } = req.body
 
         const picUrl = req.file ? `uploads/${req.file.filename}` : null
 
@@ -19,7 +19,7 @@ export const postingPost = async (req : Request, res : Response)  => {
         res.status(201).json({message:'post added successfully', post});
 
     } catch (error) {
-        res.status(500).json({message : error})
+        res.status(500).json({message : `this is the erroororororo `, error })
     }
 }
 
@@ -30,7 +30,7 @@ export const gettingAllPost = async (req : Request, res : Response) => {
             return res.status(404).json({message:'no post found'})
         }
 
-        res.status(200).json({message:`here are all the post ${post}`})
+        res.status(200).json({message:`here are all the post :`, post})
     } catch (error) {
         res.status(500).json({message : error})
     }
