@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Post } from "../model/allModel";
+import { imageSender } from "../utils/imageSender";
 
 export const postingPost = async (req : Request, res : Response)  => {
     try {
@@ -30,7 +31,11 @@ export const gettingAllPost = async (req : Request, res : Response) => {
             return res.status(404).json({message:'no post found'})
         }
 
-        res.status(200).json({message:`here are all the post :`, post})
+        const updatedPost = await Promise.all( post.map(async(each) => {
+            return await imageSender(each)
+        }))
+
+        res.status(200).json({message:`here are all the post :`, updatedPost})
     } catch (error) {
         res.status(500).json({message : error})
     }
@@ -42,7 +47,8 @@ export const gettingSinglePost = async (req : Request, res : Response) =>{
         const singlePost = await Post.findOne({_id: id})
         if(!singlePost) return res.status(404).json({message: 'no post found with given id'})
         
-        res.status(200).json({message: `here is the post with id: ${id}`, singlePost})
+        const post = await imageSender(singlePost);
+        res.status(200).json({message: `here is the post with id: ${id}`, post})
     } catch (error) {
         res.status(500).json({message : error})
         
