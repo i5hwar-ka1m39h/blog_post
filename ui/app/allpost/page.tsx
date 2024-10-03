@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>
+    <div className=' mx-24 mt-10 px-10'>
       <AllpostPage/>
     </div>
   )

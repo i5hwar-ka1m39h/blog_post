@@ -3,6 +3,15 @@ import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Button } from '../ui/button'
 
 
 
@@ -28,19 +37,25 @@ const AllpostPage = () => {
   }, [getData])
   
   return (
-    <div>
+    <div className=' flex flex-row gap-5  flex-wrap'>
     {posts.map((each:any) => (
-      <div key={each._id}>
-        <Link href={`/allpost/${each._id}`}>
-        <h1>{each.title}</h1>
-        </Link>
-        <p>{each.description}</p>
-        { each.picData ? 
-        <Image src={each.picData} alt='post image' width={200} height={100}/> :
-        <h3>no image found</h3>
-        }
-      </div>
+      <Card className=' bg-slate-200'>
+      <CardHeader>
+        <CardTitle><h1>{each.title}</h1></CardTitle>
+        <CardDescription>{each.description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        {each.picData ? <Image src={each.picData} alt='post image' width={400} height={200}/> : 
+        <Image src={'/placeholder.jpg'} alt='site pic' width={400} height={200}/>}
+      </CardContent>
+      <CardFooter>
+        <Link href={`/allpost/${each._id}`}><Button>Read</Button></Link>
+      </CardFooter>
+    </Card>
+    
+    
     ))}
+    
     
     </div>
   )

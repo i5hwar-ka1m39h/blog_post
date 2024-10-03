@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import {
@@ -15,6 +15,9 @@ import { Input } from "@/components/ui/input"
 import Tiptap from './Tiptap'
 
 const EditorWrapper = () => {
+  const editorRef = useRef<{ clearEditor : () => void} | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  
   const form = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -24,8 +27,27 @@ const EditorWrapper = () => {
     }
   })
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  useEffect(() => {
+    if(inputRef.current){
+      inputRef.current.focus();
+    }
+  }, [])
+
+  const onSubmit =async(values: any) => {
+    try {
+      console.log(values);
+      
+      form.reset({
+        title: '',
+        description: '',
+        content: ''
+      })
+
+      editorRef.current?.clearEditor();
+    } catch (error) {
+      console.error('error submiting the form data', error);
+      
+    }
 
   }
 
@@ -40,7 +62,7 @@ const EditorWrapper = () => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter the title of blog" {...field} />
+                  <Input placeholder="Enter the title of blog" {...field}  ref={inputRef}/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -68,7 +90,7 @@ const EditorWrapper = () => {
               <FormItem>
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Tiptap content={field.name} onChange={field.onChange}/>
+                  <Tiptap content={field.name} onChange={field.onChange} ref={editorRef}/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -82,4 +104,6 @@ const EditorWrapper = () => {
 }
 
 export default EditorWrapper
+
+
 
