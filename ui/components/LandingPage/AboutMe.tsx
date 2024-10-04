@@ -7,12 +7,17 @@ const AboutMe = () => {
     <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">About Me</h2>
-            <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex flex-col items-center gap-8">
+              <Link href={"/createPost"}>
               <img 
-                src="/placeholder.svg?height=300&width=300" 
+                src="/main.jpg" 
                 alt="John Doe" 
-                className="rounded-full w-48 h-48 object-cover"
+                className="rounded-full w-48 h-48 object-cover cursor-pointer"
+                height={300}
+                width={300} 
+
               />
+              </Link>
               <div className="max-w-2xl">
                 <p className="text-gray-500 dark:text-gray-400 mb-4">
                   Hi, I'm John Doe, a software developer and avid traveler. Through this blog, I share my experiences in tech, my adventures around the world, and my journey of personal growth. Join me as we explore the intersections of technology, travel, and life.

@@ -17,7 +17,7 @@ const Intro = () => {
               </div>
               <div className="space-x-4">
                 <Button asChild>
-                  <Link href="/blog">Read My Blog</Link>
+                  <Link href="/allpost">Read My Blog</Link>
                 </Button>
               </div>
             </div>

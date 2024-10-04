@@ -1,5 +1,5 @@
 import { Editor } from "@tiptap/react";
-import React from "react";
+import React, { useCallback } from "react";
 import {
   AlignJustify,
   AlignLeft,
@@ -10,15 +10,36 @@ import {
   Heading3,
   Heading4,
   Italic,
+  Link,
   List,
   Quote,
   
   UnderlineIcon,
+  Unlink,
 } from 'lucide-react'
 import { Toggle } from "./ui/toggle";
 
 const Toolbar = ({editor}: {editor : Editor | null; }) => {
+
+
   if(!editor) return null;
+
+
+  const setLink = useCallback(() => {
+    const prevURL = editor?.getAttributes('link').href;
+    const url = window.prompt('URL', prevURL);
+    
+    if(url === null){
+      return null;
+    }
+
+    if(url === ''){
+      editor.chain().focus().extendMarkRange('link').unsetLink().run()
+    }
+    
+    editor.chain().focus().extendMarkRange('link').setLink({href: url}).run()
+
+  },[editor])
 
   return(
     <div className="flex flex-row flex-wrap gap-2">
@@ -117,6 +138,22 @@ const Toolbar = ({editor}: {editor : Editor | null; }) => {
         className="data-[state=on]:bg-slate-500 data-[state=on]:text-black border border-black rounded-[5px]"
       >
         <AlignJustify className="h-4 w-4"/>
+      </Toggle>
+
+      <Toggle 
+        pressed={editor.isActive('link')}
+        onPressedChange={() => setLink()}
+        className="data-[state=on]:bg-slate-500 data-[state=on]:text-black border border-black rounded-[5px]"
+      >
+        <Link className="h-4 w-4"/>
+      </Toggle>
+
+      <Toggle 
+        pressed={!editor.isActive('link')}
+        onPressedChange={() => editor.chain().focus().unsetLink().run()}
+        className="data-[state=on]:bg-slate-500 data-[state=on]:text-black border border-black rounded-[5px]"
+      >
+        <Unlink className="h-4 w-4"/>
       </Toggle>
     </div>
   )

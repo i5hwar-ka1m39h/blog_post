@@ -4,8 +4,8 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link className="flex items-center justify-center" href="#">
+    <header className="px-4 lg:px-6 h-14 flex items-center border border-gray-200 shadow-md">
+        <Link className="flex items-center justify-center" href="/">
           <BookOpenIcon className="h-6 w-6 mr-2" />
           <span className="font-bold">John Doe's Blog</span>
         </Link>
@@ -16,7 +16,7 @@ const Navbar = () => {
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#featured">
             Featured Posts
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/blog">
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/allpost">
             All Posts
           </Link>
         </nav>

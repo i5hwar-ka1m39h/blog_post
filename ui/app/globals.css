@@ -180,3 +180,29 @@ ul {
     margin-top: 1.33em;
     margin-bottom: 1.33em;
   }
+
+
+
+  /* Style for all anchor tags */
+p a {
+  color: #053bff; /* Change to your preferred color */
+  text-decoration: none; /* Remove default underline */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover state for anchor tags */
+p a:hover {
+  color: #0366d6; /* Slightly darker color on hover */
+  text-decoration: underline; /* Add underline when hovering */
+}
+
+/* Active/Visited state */
+p a:visited {
+  color: #6a737d; /* Change the color of visited links */
+}
+
+/* Focused state (when using keyboard navigation) */
+p a:focus {
+  outline: 2px dashed #0070f3; /* Optional focus outline for accessibility */
+  outline-offset: 2px;
+}
